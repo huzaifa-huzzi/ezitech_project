@@ -1,3 +1,5 @@
+import 'package:ezitech_project_1/Routes/RoutesInitializing.dart';
+import 'package:ezitech_project_1/View/DashBoard/DashBoardScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Ezitech Project',
-      home:
+      home:const  DashboardScreen(),
+      getPages: AppRoutes.appRoutes(),
     );
   }
 }
