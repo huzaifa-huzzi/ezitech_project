@@ -1,10 +1,17 @@
 import 'package:ezitech_project_1/Routes/RoutesInitializing.dart';
-import 'package:ezitech_project_1/View/DashBoard/DashBoardScreen.dart';
+import 'package:ezitech_project_1/View/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Ezitech Project',
-      home:const  DashboardScreen(),
+      home:LoginScreen(),
       getPages: AppRoutes.appRoutes(),
     );
   }
