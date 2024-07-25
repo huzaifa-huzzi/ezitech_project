@@ -1,3 +1,4 @@
+import 'package:ezitech_project_1/Routes/Routes_name.dart';
 import 'package:ezitech_project_1/view_model/LoginScreen/LoginController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -65,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 10),
                     InkWell(
                       onTap: (){
-
+                          Get.toNamed(RouteName.signupScreen);
                       },
                       child:const  Text.rich(
                         TextSpan(
