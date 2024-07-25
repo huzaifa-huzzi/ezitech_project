@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "22495016326",
+    "project_id": "ezitech-project-d6b71",
+    "storage_bucket": "ezitech-project-d6b71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22495016326:android:d919de44039604b982e807",
+        "android_client_info": {
+          "package_name": "com.huzaifakhan.ezitechproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJkG7pcdw5QQPIr-6sA3Jc1XROsFkIk10"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

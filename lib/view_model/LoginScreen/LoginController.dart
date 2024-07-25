@@ -10,8 +10,8 @@ class LoginController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final DatabaseReference _ref = FirebaseDatabase.instance.ref().child('user');
 
-  final emailController = TextEditingController().obs;
-  final passwordController = TextEditingController().obs;
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
   final emailFocus = FocusNode().obs;
   final passwordFocus = FocusNode().obs;
   final loading = false.obs;
@@ -43,8 +43,8 @@ class LoginController extends GetxController {
 
   @override
   void onClose() {
-    emailController.value.dispose();
-    passwordController.value.dispose();
+    emailController.dispose();
+    passwordController.dispose();
     emailFocus.value.dispose();
     passwordFocus.value.dispose();
     super.onClose();
