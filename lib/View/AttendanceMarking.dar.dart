@@ -29,6 +29,8 @@ class _AttendanceMarkingState extends State<AttendanceMarking> {
           child: GetBuilder<AttendanceMarkingController>(
             builder: (controller) {
               return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   DropdownButtonFormField<String>(
                     value: controller.attendanceStatus,
