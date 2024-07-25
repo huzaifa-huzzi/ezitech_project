@@ -32,7 +32,7 @@ class SignUpController extends GetxController {
           email: email, password: password).then((value) {
         SessionManager().userId = value.user!.uid.toString();
         Utils.snackBar('Signin'.tr, 'Signinsuccessful'.tr);
-        Get.toNamed(RouteName.attendanceMarking);
+         Get.toNamed(RouteName.attendanceMarking);
         ref.child(value.user!.uid.toString()).set({
           'uid': value.user!.uid.toString(),
           'email': value.user!.email.toString(),
