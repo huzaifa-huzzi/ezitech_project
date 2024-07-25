@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Ezitech Project',
+      debugShowCheckedModeBanner: false,
       home:LoginScreen(),
       getPages: AppRoutes.appRoutes(),
     );
