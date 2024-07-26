@@ -1,3 +1,4 @@
+import 'package:ezitech_project_1/Routes/Routes_name.dart';
 import 'package:ezitech_project_1/view_model/attendaceMaking/AttendaneakingController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -75,20 +76,27 @@ class _AttendanceMarkingState extends State<AttendanceMarking> {
                       validator: (value) => value!.isEmpty ? 'Please enter the date' : null,
                     ),
                   ],
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _controller.submitAttendance(context);
+                      }
+                    },
+                    child: const Text('Submit Attendance'),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Get.toNamed(RouteName.adminPanel);
+                    },
+                    child: const Text('Go to Admin Panel'),
+                  ),
                 ],
               );
             },
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.red,
-        onPressed: () {
-          if (_formKey.currentState!.validate()) {
-            _controller.submitAttendance(context);
-          }
-        },
-        child: const Icon(Icons.check,color: Colors.white,),
       ),
     );
   }
