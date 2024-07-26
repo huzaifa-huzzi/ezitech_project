@@ -2,7 +2,6 @@ import 'package:ezitech_project_1/view_model/AdminPanel/AdminPanelController.dar
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class AdminPanel extends StatelessWidget {
   final AdminPanelController controller = Get.put(AdminPanelController());
 
@@ -29,7 +28,7 @@ class AdminPanel extends StatelessWidget {
                         ? Colors.green
                         : attendance['approvalStatus'] == 'Disapproved'
                         ? Colors.red
-                        : Colors.blue;
+                        : Colors.yellow;
                   } else {
                     cardColor = Colors.white;
                   }
@@ -49,8 +48,8 @@ class AdminPanel extends StatelessWidget {
                             Text('Reason: ${attendance['why']}'),
                         ],
                       ),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
+                      trailing: Wrap(
+                        spacing: 8.0,
                         children: [
                           if (attendance['status'] == 'Leave' && attendance['approvalStatus'] == 'Pending') ...[
                             IconButton(
@@ -62,10 +61,16 @@ class AdminPanel extends StatelessWidget {
                               onPressed: () => controller.disapproveLeave(attendance['key']),
                             ),
                           ],
-                          IconButton(
-                            icon: const Icon(Icons.delete),
-                            onPressed: () => controller.deleteAttendance(attendance['key']),
-                          ),
+                          if (attendance['status'] == 'Present' || attendance['status'] == 'Absent') ...[
+                            IconButton(
+                              icon: const Icon(Icons.edit),
+                              onPressed: () => controller.editAttendance(attendance['key'], context),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () => controller.deleteAttendance(attendance['key']),
+                            ),
+                          ],
                         ],
                       ),
                     ),
@@ -73,6 +78,15 @@ class AdminPanel extends StatelessWidget {
                 },
               );
             }),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Get.toNamed('/');
+              },
+              child: const Text('Back to Attendance Marking'),
+            ),
           ),
         ],
       ),
