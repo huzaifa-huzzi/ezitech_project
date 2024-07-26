@@ -18,7 +18,7 @@ class _AttendanceMarkingState extends State<AttendanceMarking> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Attendance marking'),
+        title: const Text('User Panel'),
         centerTitle: true,
         backgroundColor: Colors.red,
         automaticallyImplyLeading: false,
@@ -27,74 +27,89 @@ class _AttendanceMarkingState extends State<AttendanceMarking> {
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
-          child: GetBuilder<AttendanceMarkingController>(
-            builder: (controller) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DropdownButtonFormField<String>(
-                    value: controller.attendanceStatus,
-                    hint: const Text('Select Attendance Status'),
-                    items: ['Present', 'Absent', 'Leave']
-                        .map((status) => DropdownMenuItem(
-                      value: status,
-                      child: Text(status),
-                    ))
-                        .toList(),
-                    onChanged: (value) {
-                      controller.attendanceStatus = value;
-                      controller.update();
-                    },
-                    validator: (value) => value == null ? 'Please select an option' : null,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // CircularAvatar for image selection
+              GestureDetector(
+                onTap: () async {
+                  await _controller.pickImage();
+                },
+                child: Obx(() {
+                  return CircleAvatar(
+                    radius: 50,
+                    backgroundImage: _controller.imageUrl.value.isNotEmpty
+                        ? NetworkImage(_controller.imageUrl.value)
+                        : null,
+                    child: _controller.imageUrl.value.isEmpty
+                        ? const Icon(Icons.add_a_photo, size: 30, color: Colors.white)
+                        : null,
+                  );
+                }),
+              ),
+              const SizedBox(height: 20),
+              DropdownButtonFormField<String>(
+                value: _controller.attendanceStatus.value.isNotEmpty
+                    ? _controller.attendanceStatus.value
+                    : null,
+                hint: const Text('Select Attendance Status'),
+                items: ['Present', 'Absent', 'Leave']
+                    .map((status) => DropdownMenuItem(
+                  value: status,
+                  child: Text(status),
+                ))
+                    .toList(),
+                onChanged: (value) {
+                  _controller.attendanceStatus.value = value ?? '';
+                },
+                validator: (value) => value == null ? 'Please select an option' : null,
+              ),
+              if (_controller.attendanceStatus.value == 'Present' || _controller.attendanceStatus.value == 'Absent') ...[
+                TextFormField(
+                  controller: _controller.dayController,
+                  decoration: const InputDecoration(labelText: 'Day'),
+                  validator: (value) => value!.isEmpty ? 'Please enter the day' : null,
+                ),
+                TextFormField(
+                  controller: _controller.dateController,
+                  decoration: const InputDecoration(labelText: 'Date'),
+                  validator: (value) => value!.isEmpty ? 'Please enter the date' : null,
+                ),
+              ],
+              if (_controller.attendanceStatus.value == 'Leave') ...[
+                TextFormField(
+                  controller: _controller.whyController,
+                  decoration: const InputDecoration(
+                    labelText: 'Why?',
+                    border: OutlineInputBorder(),
                   ),
-                  if (controller.attendanceStatus == 'Present' || controller.attendanceStatus == 'Absent') ...[
-                    TextFormField(
-                      controller: controller.dayController,
-                      decoration: const InputDecoration(labelText: 'Day'),
-                      validator: (value) => value!.isEmpty ? 'Please enter the day' : null,
-                    ),
-                    TextFormField(
-                      controller: controller.dateController,
-                      decoration: const InputDecoration(labelText: 'Date'),
-                      validator: (value) => value!.isEmpty ? 'Please enter the date' : null,
-                    ),
-                  ],
-                  if (controller.attendanceStatus == 'Leave') ...[
-                    TextFormField(
-                      controller: controller.whyController,
-                      decoration: const InputDecoration(
-                        labelText: 'Why?',
-                        border: OutlineInputBorder(),
-                      ),
-                      maxLines: 4,
-                      validator: (value) => value!.isEmpty ? 'Please enter the reason' : null,
-                    ),
-                    TextFormField(
-                      controller: controller.dateController,
-                      decoration: const InputDecoration(labelText: 'Date'),
-                      validator: (value) => value!.isEmpty ? 'Please enter the date' : null,
-                    ),
-                  ],
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        _controller.submitAttendance(context);
-                      }
-                    },
-                    child: const Text('Submit Attendance'),
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      Get.toNamed(RouteName.adminPanel);
-                    },
-                    child: const Text('Go to Admin Panel'),
-                  ),
-                ],
-              );
-            },
+                  maxLines: 4,
+                  validator: (value) => value!.isEmpty ? 'Please enter the reason' : null,
+                ),
+                TextFormField(
+                  controller: _controller.dateController,
+                  decoration: const InputDecoration(labelText: 'Date'),
+                  validator: (value) => value!.isEmpty ? 'Please enter the date' : null,
+                ),
+              ],
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    _controller.submitAttendance(context);
+                  }
+                },
+                child: const Text('Submit Attendance'),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Get.toNamed(RouteName.adminPanel);
+                },
+                child: const Text('Go to Admin Panel'),
+              ),
+            ],
           ),
         ),
       ),

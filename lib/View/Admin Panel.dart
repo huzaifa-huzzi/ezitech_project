@@ -79,15 +79,6 @@ class AdminPanel extends StatelessWidget {
               );
             }),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {
-                Get.toNamed('/');
-              },
-              child: const Text('Back to Attendance Marking'),
-            ),
-          ),
         ],
       ),
     );

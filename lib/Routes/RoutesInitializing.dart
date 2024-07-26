@@ -11,7 +11,7 @@ class AppRoutes{
     GetPage(name: RouteName.loginScreen, page: () => LoginScreen()),
     GetPage(name: RouteName.signupScreen, page: () => SignUpScreen()),
     //view
-    GetPage(name: RouteName.attendanceMarking, page: () =>const AttendanceMarking()),
+    GetPage(name: RouteName.attendanceMarking, page: () => AttendanceMarking()),
     GetPage(name: RouteName.adminPanel, page: () => AdminPanel()),
   ];
 

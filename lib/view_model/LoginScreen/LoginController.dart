@@ -29,7 +29,7 @@ class LoginController extends GetxController {
           'returnSecureToken': true,
         });
         loading.value = false;
-        Get.toNamed(RouteName.attendanceMarking);
+        Get.toNamed(RouteName.adminPanel);
         Utils.snackBar('Login', 'Login Successful');
       } else {
         loading.value = false;
