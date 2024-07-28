@@ -11,7 +11,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final controller = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     TextFormField(
-                      controller: controller.emailController,
                       decoration: const InputDecoration(labelText: 'Email'),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -42,7 +40,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
-                      controller: controller.passwordController,
                       decoration: const InputDecoration(labelText: 'Password'),
                       obscureText: true,
                       validator: (value) {
@@ -55,11 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          String email = controller.emailController.text;
-                          String password = controller.passwordController.text;
-                          controller.login(email, password, context);
-                        }
+                       Get.toNamed(RouteName.adminPanel);
                       },
                       child: const Text('Login',style: TextStyle(color: Colors.red),),
                     ),
