@@ -21,6 +21,13 @@ class _AttendanceMarkingState extends State<AttendanceMarking> {
         centerTitle: true,
         backgroundColor: Colors.red,
         automaticallyImplyLeading: false,
+        actions: [
+          InkWell(
+              onTap: (){
+                Get.toNamed(RouteName.loginScreen);
+              },
+              child:const  Icon(Icons.logout))
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -36,7 +43,7 @@ class _AttendanceMarkingState extends State<AttendanceMarking> {
                     radius: 50,
                     backgroundImage: _controller.imageUrl.value.isNotEmpty
                         ? NetworkImage(_controller.imageUrl.value)
-                        : const AssetImage('assets/placeholder_image.png'),
+                        : null,
                     backgroundColor: Colors.grey[300],
                     child: _controller.imageUrl.value.isEmpty
                         ? const Icon(Icons.camera_alt, size: 50, color: Colors.black45)

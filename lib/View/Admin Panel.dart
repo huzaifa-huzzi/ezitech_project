@@ -1,3 +1,4 @@
+import 'package:ezitech_project_1/Routes/Routes_name.dart';
 import 'package:ezitech_project_1/view_model/AdminPanel/AdminPanelController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,10 +9,18 @@ class AdminPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Admin Panel'),
         backgroundColor: Colors.red,
         centerTitle: true,
+        actions: [
+          InkWell(
+              onTap: (){
+                Get.toNamed(RouteName.loginScreen);
+              },
+              child:const  Icon(Icons.logout))
+        ],
       ),
       body: Column(
         children: [
