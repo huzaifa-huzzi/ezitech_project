@@ -1,5 +1,4 @@
 import 'package:ezitech_project_1/Routes/Routes_name.dart';
-import 'package:ezitech_project_1/view_model/LoginScreen/LoginController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +14,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login'),backgroundColor: Colors.red,centerTitle: true,),
+      appBar: AppBar(title: const Text('Login'),backgroundColor: Colors.red,centerTitle: true,automaticallyImplyLeading: false,),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
