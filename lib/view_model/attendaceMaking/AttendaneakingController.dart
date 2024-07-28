@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:io'; // Import for File
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -8,11 +8,11 @@ import 'package:firebase_database/firebase_database.dart';
 
 class AttendanceMarkingController extends GetxController {
   final formKey = GlobalKey<FormState>();
-  final attendanceStatus = ''.obs; // Default empty string
+  final attendanceStatus = ''.obs;
   final TextEditingController dayController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
   final TextEditingController whyController = TextEditingController();
-  final imageUrl = ''.obs; // Default empty string
+  final imageUrl = ''.obs;
   final DatabaseReference _ref = FirebaseDatabase.instance.ref('attendance');
 
   Future<void> pickImage() async {
@@ -20,12 +20,14 @@ class AttendanceMarkingController extends GetxController {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       String uploadedImageUrl = await _uploadImage(File(image.path));
-      imageUrl.value = uploadedImageUrl; // Update the observable
+      imageUrl.value = uploadedImageUrl;
     }
   }
 
   Future<String> _uploadImage(File imageFile) async {
-    final Reference storageRef = FirebaseStorage.instance.ref().child('attendance_images/${DateTime.now().toIso8601String()}');
+    final Reference storageRef = FirebaseStorage.instance
+        .ref()
+        .child('attendance_images/${DateTime.now().toIso8601String()}');
     final UploadTask uploadTask = storageRef.putFile(imageFile);
 
     final TaskSnapshot snapshot = await uploadTask;
@@ -44,7 +46,7 @@ class AttendanceMarkingController extends GetxController {
     Map<String, String> attendanceData = {
       'status': attendanceStatus.value,
       'date': dateController.text,
-      'imageUrl': imageUrl.value, // No need to check for null
+      'imageUrl': imageUrl.value,
     };
 
     if (attendanceStatus.value == 'Present' || attendanceStatus.value == 'Absent') {
@@ -68,11 +70,11 @@ class AttendanceMarkingController extends GetxController {
   }
 
   void resetForm() {
-    attendanceStatus.value = ''; // Reset to default empty string
+    attendanceStatus.value = '';
     dayController.clear();
     dateController.clear();
     whyController.clear();
-    imageUrl.value = ''; // Reset to default empty string
+    imageUrl.value = '';
   }
 
   @override

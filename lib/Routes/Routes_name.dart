@@ -7,5 +7,6 @@ class RouteName{
   static const String signupScreen = '/SignUpScreen';
   static const String attendanceMarking = '/AttendanceMarking';
   static const String adminPanel = '/AdminPanel';
+  static const String studentSeeing = '/StudentAttendanceScreen';
 
 }
